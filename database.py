@@ -33,9 +33,12 @@ def create_data_base(db_file, json_files):
 
     # for each json file
     for json_f in json_files:
-        with open('../Zendesk_challenge/Json_Data/' + json_f,
-                  encoding='utf-8-sig') as json_file:
-            json_data = json.loads(json_file.read())
+        try:
+            with open('../Search_challenge/Json_Data/' + json_f,
+                    encoding='utf-8-sig') as json_file:
+                json_data = json.loads(json_file.read())
+        except json.JSONDecodeError:
+            print 'Decoding JSON has failed'
 
         # Extract columns names
         columns = []
