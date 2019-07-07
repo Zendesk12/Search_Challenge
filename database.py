@@ -55,7 +55,7 @@ def create_data_base(db_file, json_files):
             c.execute(create_query)
             c.executemany(insert_query, values)
         except sqlite3.OperationalError as e:
-            print(e.message)
+            print(e)
 
         values.clear()
         conn.commit()

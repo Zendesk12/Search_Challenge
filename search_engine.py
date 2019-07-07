@@ -24,7 +24,7 @@ def search_by_user(conn, search_attr, search_value):
             "ON (users.organization_id=organizations._id)  "
             "WHERE users.{}=\"{}\"".format(search_attr, search_value))
     except sqlite3.OperationalError as e:
-        print(e.message)
+        print(e)
 
     users_and_organizations = cursor_1.fetchall()
 
@@ -37,8 +37,62 @@ def search_by_user(conn, search_attr, search_value):
             "FROM users"
             " WHERE {}=\"{}\")".format(search_attr, search_value))
     except sqlite3.OperationalError as e:
-        print(e.message)
+        print(e)
 
     tickets = cursor_2.fetchall()
 
     return users_and_organizations, tickets
+
+
+# Query in organizations data base
+
+def search_by_organization(conn, search_attr, search_value):
+    """
+        :param conn: connection object with the data base
+        :param search_attr: name of the column to search
+        :param search_value: value to search
+    """
+    conn.row_factory = sqlite3.Row
+
+    # Search organization values
+    try:
+        cursor_1 = conn.execute(
+            "SELECT * "
+            "FROM organizations "
+            "WHERE {}=\"{}\"".format(search_attr, search_value))
+    except sqlite3.OperationalError as e:
+        print(e)
+
+    organizations = cursor_1.fetchall()
+
+    # Search tickets values
+    try:
+        cursor_2 = conn.execute(
+            "SELECT organization_id, subject "
+            "FROM tickets "
+            "WHERE organization_id IN"
+            "(SELECT organizations._id "
+            "FROM organizations"
+            " WHERE {}=\"{}\")".format(search_attr, search_value))
+    except sqlite3.OperationalError as e:
+        print(e)
+
+    tickets = cursor_2.fetchall()
+
+    # Search users values
+    try:
+        cursor_3 = conn.execute(
+            "SELECT organization_id, users.name "
+            "FROM users "
+            "WHERE organization_id IN " 
+            "(SELECT organizations._id "
+            "FROM organizations "
+            "WHERE {}=\"{}\")".format(search_attr, search_value))
+    except sqlite3.OperationalError as e:
+        print(e)
+
+    users = cursor_3.fetchall()
+
+    return organizations, users, tickets
+
+

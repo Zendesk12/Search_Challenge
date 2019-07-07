@@ -46,6 +46,7 @@ class TestSystemFunctions(unittest.TestCase):
 		result = cursor.fetchall()[0][0]
 		self.assertIsNotNone(conn)
 		self.assertEqual(result, 'test')
+		conn.close()
 
 
 	def test_createDataBase_many(self):
@@ -56,6 +57,7 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertIsNotNone(conn)
 		self.assertEqual(result[0][0], 'test')
 		self.assertEqual(result[1][0], 'test_2')
+		conn.close()
 
 
 	def test_searchByUser_user_id(self):
@@ -69,6 +71,7 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
 		self.assertEqual(tuple(result_2[0])[1], 'A Problem in Switzerland')
 		self.assertEqual(tuple(result_2[1])[1], 'A Problem in Svalbard and Jan Mayen Islands')
+		conn.close()
 
 
 	def test_searchByUser_url(self):
@@ -81,6 +84,7 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
 		self.assertEqual(tuple(result_2[0])[1], 'A Problem in Switzerland')
 		self.assertEqual(tuple(result_2[1])[1], 'A Problem in Svalbard and Jan Mayen Islands')
+		conn.close()
 
 
 	def test_searchByUser_external_id(self):
@@ -93,6 +97,7 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
 		self.assertEqual(tuple(result_2[0])[1], 'A Problem in Switzerland')
 		self.assertEqual(tuple(result_2[1])[1], 'A Problem in Svalbard and Jan Mayen Islands')
+		conn.close()
 
 
 	def test_searchByUser_name(self):
@@ -105,6 +110,7 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
 		self.assertEqual(tuple(result_2[0])[1], 'A Problem in Switzerland')
 		self.assertEqual(tuple(result_2[1])[1], 'A Problem in Svalbard and Jan Mayen Islands')
+		conn.close()
 
 
 	def test_searchByUser_alias(self):
@@ -117,6 +123,7 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
 		self.assertEqual(tuple(result_2[0])[1], 'A Problem in Switzerland')
 		self.assertEqual(tuple(result_2[1])[1], 'A Problem in Svalbard and Jan Mayen Islands')
+		conn.close()
 
 
 	def test_searchByUser_created_at(self):
@@ -129,6 +136,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
 		self.assertEqual(tuple(result_2[0])[1], 'A Problem in Switzerland')
 		self.assertEqual(tuple(result_2[1])[1], 'A Problem in Svalbard and Jan Mayen Islands')
+		conn.close()
+
 
 	def test_searchByUser_active(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -140,6 +149,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[-1]['_id'], '75')
 		self.assertEqual(result_1[-1]['name'], 'Catalina Simpson')
 		self.assertEqual(result_1[-1]['organization_name'], 'Multron')
+		conn.close()
+
 
 	def test_searchByUser_verified(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -151,6 +162,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[-1]['_id'], '75')
 		self.assertEqual(result_1[-1]['name'], 'Catalina Simpson')
 		self.assertEqual(result_1[-1]['organization_name'], 'Multron')
+		conn.close()
+
 
 	def test_searchByUser_shared(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -162,6 +175,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[-1]['_id'], '74')
 		self.assertEqual(result_1[-1]['name'], 'Melissa Bishop')
 		self.assertEqual(result_1[-1]['organization_name'], 'Isotronic')
+		conn.close()
+
 
 	def test_searchByUser_locale(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -173,6 +188,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[-1]['_id'], '74')
 		self.assertEqual(result_1[-1]['name'], 'Melissa Bishop')
 		self.assertEqual(result_1[-1]['organization_name'], 'Isotronic')
+		conn.close()
+
 
 	def test_searchByUser_timezone(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -181,6 +198,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['_id'], '1')
 		self.assertEqual(result_1[0]['name'], 'Francisca Rasmussen')
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
+		conn.close()
+
 
 	def test_searchByUser_last_login_at(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -189,6 +208,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['_id'], '1')
 		self.assertEqual(result_1[0]['name'], 'Francisca Rasmussen')
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
+		conn.close()
+
 
 	def test_searchByUser_email(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -197,6 +218,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['_id'], '2')
 		self.assertEqual(result_1[0]['name'], 'Cross Barlow')
 		self.assertEqual(result_1[0]['organization_name'], 'Qualitern')
+		conn.close()
+
 
 	def test_searchByUser_phone(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -205,6 +228,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['_id'], '2')
 		self.assertEqual(result_1[0]['name'], 'Cross Barlow')
 		self.assertEqual(result_1[0]['organization_name'], 'Qualitern')
+		conn.close()
+
 
 	def test_searchByUser_signature(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -213,6 +238,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['_id'], '1')
 		self.assertEqual(result_1[0]['name'], 'Francisca Rasmussen')
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
+		conn.close()
+
 
 	def test_searchByUser_organization_id(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -221,6 +248,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['_id'], '2')
 		self.assertEqual(result_1[0]['name'], 'Cross Barlow')
 		self.assertEqual(result_1[0]['organization_name'], 'Qualitern')
+		conn.close()
+
 
 	def test_searchByUser_suspended(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -229,6 +258,8 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['_id'], '2')
 		self.assertEqual(result_1[0]['name'], 'Cross Barlow')
 		self.assertEqual(result_1[0]['organization_name'], 'Qualitern')
+		conn.close()
+
 
 	def test_searchByUser_role(self):
 		conn = database.create_connection("../Search_challenge/sqliteTest.db")
@@ -237,7 +268,96 @@ class TestSystemFunctions(unittest.TestCase):
 		self.assertEqual(result_1[0]['_id'], '1')
 		self.assertEqual(result_1[0]['name'], 'Francisca Rasmussen')
 		self.assertEqual(result_1[0]['organization_name'], 'Multron')
+		conn.close()
 
+
+
+	def test_searchByOrganization_id(self):
+		conn = database.create_connection("../Search_challenge/sqliteTest.db")
+		result_1, result_2, result_3 = search_engine.search_by_organization(conn, '_id', '106')
+		self.assertIsNotNone(conn)
+		self.assertEqual(result_1[0]['_id'], '106')
+		self.assertEqual(result_1[0]['name'], 'Qualitern')
+		self.assertEqual(result_1[0]['external_id'], '2355f080-b37c-44f3-977e-53c341fde146')
+		self.assertEqual(result_2[0][1], 'Cross Barlow')
+		self.assertEqual(result_3[0][1], 'A Nuisance in Greece')
+		conn.close()
+
+
+	def test_searchByOrganization_url(self):
+		conn = database.create_connection("../Search_challenge/sqliteTest.db")
+		result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'url', 'http://initech.zendesk.com/api/v2/organizations/106.json')
+		self.assertIsNotNone(conn)
+		self.assertEqual(result_1[0]['_id'], '106')
+		self.assertEqual(result_1[0]['name'], 'Qualitern')
+		self.assertEqual(result_1[0]['external_id'], '2355f080-b37c-44f3-977e-53c341fde146')
+		self.assertEqual(result_2[0][1], 'Cross Barlow')
+		self.assertEqual(result_3[0][1], 'A Nuisance in Greece')
+		conn.close()
+
+
+	def test_searchByOrganization_external_id(self):
+		conn = database.create_connection("../Search_challenge/sqliteTest.db")
+		result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'external_id', '2355f080-b37c-44f3-977e-53c341fde146')
+		self.assertIsNotNone(conn)
+		self.assertEqual(result_1[0]['_id'], '106')
+		self.assertEqual(result_1[0]['name'], 'Qualitern')
+		self.assertEqual(result_1[0]['external_id'], '2355f080-b37c-44f3-977e-53c341fde146')
+		self.assertEqual(result_2[0][1], 'Cross Barlow')
+		self.assertEqual(result_3[0][1], 'A Nuisance in Greece')
+		conn.close()
+
+
+	def test_searchByOrganization_name(self):
+		conn = database.create_connection("../Search_challenge/sqliteTest.db")
+		result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'name', 'Qualitern')
+		self.assertIsNotNone(conn)
+		self.assertEqual(result_1[0]['_id'], '106')
+		self.assertEqual(result_1[0]['name'], 'Qualitern')
+		self.assertEqual(result_1[0]['external_id'], '2355f080-b37c-44f3-977e-53c341fde146')
+		self.assertEqual(result_2[0][1], 'Cross Barlow')
+		self.assertEqual(result_3[0][1], 'A Nuisance in Greece')
+		conn.close()
+
+
+	def test_searchByOrganization_created_at(self):
+		conn = database.create_connection("../Search_challenge/sqliteTest.db")
+		result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'created_at', '2016-07-23T09:48:02 -10:00')
+		self.assertIsNotNone(conn)
+		self.assertEqual(result_1[0]['_id'], '106')
+		self.assertEqual(result_1[0]['name'], 'Qualitern')
+		self.assertEqual(result_1[0]['external_id'], '2355f080-b37c-44f3-977e-53c341fde146')
+		self.assertEqual(result_2[0][1], 'Cross Barlow')
+		self.assertEqual(result_3[0][1], 'A Nuisance in Greece')
+		conn.close()
+
+
+	def test_searchByOrganization_details(self):
+		conn = database.create_connection("../Search_challenge/sqliteTest.db")
+		result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'details', 'Artisân')
+		self.assertIsNotNone(conn)
+		self.assertEqual(result_1[0]['_id'], '106')
+		self.assertEqual(result_1[0]['name'], 'Qualitern')
+		self.assertEqual(result_1[0]['external_id'], '2355f080-b37c-44f3-977e-53c341fde146')
+		self.assertEqual(result_1[-1]['_id'], '114')
+		self.assertEqual(result_1[-1]['name'], 'Isotronic')
+		self.assertEqual(result_1[-1]['external_id'], '49c97d6a-f1ec-422e-aabe-8a429e81e656')
+		conn.close()
+
+
+	def test_searchByOrganization_shared_tickets(self):
+		conn = database.create_connection("../Search_challenge/sqliteTest.db")
+		result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'shared_tickets', False)
+		self.assertIsNotNone(conn)
+		self.assertEqual(result_1[0]['_id'], '101')
+		self.assertEqual(result_1[0]['name'], 'Enthaze')
+		self.assertEqual(result_1[0]['external_id'], '9270ed79-35eb-4a38-a46f-35725197ea8d')
+		self.assertEqual(result_1[-1]['_id'], '125')
+		self.assertEqual(result_1[-1]['name'], 'Strezzö')
+		self.assertEqual(result_1[-1]['external_id'], '42a1a845-70cf-40ed-a762-acb27fd606cc')
+		conn.close()
+
+	
 
 # Run the tests
 
