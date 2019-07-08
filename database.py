@@ -6,12 +6,12 @@ from datetime import datetime
 
 # Create a database connection to a SQLite database 
 
-def create_connection(db_file):
+def create_connection():
     '''
     :param db_file: Data base file path 
     '''
     try:
-        conn = sqlite3.connect(db_file)
+        conn = sqlite3.connect(':memory:')
         print(sqlite3.version)
     except Error as e:
         print(e)
@@ -20,13 +20,12 @@ def create_connection(db_file):
 
 # Create a database from Json data files
 
-def create_data_base(db_file, json_files):
+def create_data_base(json_files):
     '''
-    :param db_file: Data base file path
     :param json_file: List with the names of the json files
     '''
 
-    conn = create_connection(db_file)
+    conn = create_connection()
 
     print("insert has started at " + str(datetime.now()))
 
@@ -63,6 +62,8 @@ def create_data_base(db_file, json_files):
         print("insert table " + table_name + " has completed")
     print("insert has completed at " + str(datetime.now()))
 
+    return conn
+
 
 # Extract columns names
 
@@ -94,6 +95,3 @@ def extract_data_values(json_data, columns):
 
 
     return values
-
-if __name__ == '__main__':
-    create_data_base("../Search_challenge/sqlite.db", ['users.json', 'organizations.json', 'tickets.json'])

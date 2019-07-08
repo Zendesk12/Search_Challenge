@@ -1,12 +1,13 @@
 import sqlite3
 
 from sqlite3 import Error
+import database
 
 '''This file contains the  search funtions of the application.'''
 
-# Query in users data base
+# Query in users table
 
-def search_by_user(conn, search_attr, search_value):
+def search_by_user(conn, search_attr, search_value=None):
     """
     :param conn: connection object with the data base
     :param search_attr: name of the column to search
@@ -43,10 +44,9 @@ def search_by_user(conn, search_attr, search_value):
 
     return users_and_organizations, tickets
 
+# Query in organizations table
 
-# Query in organizations data base
-
-def search_by_organization(conn, search_attr, search_value):
+def search_by_organization(conn, search_attr, search_value=None):
     """
         :param conn: connection object with the data base
         :param search_attr: name of the column to search
@@ -93,6 +93,39 @@ def search_by_organization(conn, search_attr, search_value):
 
     users = cursor_3.fetchall()
 
-    return organizations, users, tickets
+    return organizations, tickets, users
+
+# Query in tickets table
+
+def search_by_tickets(conn, search_attr, search_value=None):
+    """
+        :param conn: connection object with the data base
+        :param search_attr: name of the column to search
+        :param search_value: value to search
+    """
+    conn.row_factory = sqlite3.Row
+
+    # Search tickets values
+    try:
+        cursor_1 = conn.execute(
+            "SELECT tickets.*, "
+            "organizations.name AS organization_name , "
+            "users.name AS user_name "
+            "FROM tickets "
+            "INNER JOIN users "
+            "ON (tickets.submitter_id=users._id)  "
+            "INNER JOIN organizations "
+            "ON (tickets.organization_id=organizations._id)"
+            " WHERE tickets.{}=\"{}\"".format(search_attr, search_value))
+    except sqlite3.OperationalError as e:
+        print(e)
+
+    tickets = cursor_1.fetchall()
+
+    return tickets
+
+
+
+
 
 
