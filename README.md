@@ -10,7 +10,7 @@ Description
 - The application uses Sqlite3.row like the main structure to iterate through the data.
 - The data file (Json_data) contains the json format data for users, 
 organizations and tickets. Also, it contains to data files for testing
-(test.json and test2_json).
+(test.json and test_2.json).
 
 
 Getting Started
@@ -113,6 +113,6 @@ Running the code
   - Notes:
   	* If you press 'ctrl+d' will create the EOF in the system.
   	
-  	* If you type 'quit' any time to exit.
+  	* You could type 'quit' any time to exit.
   	
   	* This system has been tested in Mac, Linux, Ubuntu and Centos.
