@@ -46,7 +46,6 @@ Running the code
   ```
   $ python test.py
   ```
-  ```
   * The output should be similar to:
   ```
   $ Ran 52 tests in 0.630s
