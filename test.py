@@ -57,9 +57,9 @@ class TestSystemFunctions(unittest.TestCase):
         conn.close()
 
     # Test Search Engine Functions
-    
+
     # Test Search_by_user function
-    
+
     def test_searchByUser_user_id(self):
         conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
         result_1, result_2 = search_engine.search_by_user(conn, '_id', '75')
@@ -263,16 +263,16 @@ class TestSystemFunctions(unittest.TestCase):
         self.assertEqual(result_1[0]['organization_name'], 'Multron')
         conn.close()
 
-     def test_searchByuser_wrong_column(self):
+    def test_searchByUser_wrong_column(self):
         conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
-        result_1, result_2 = search_engine.search_by_user(conn, 'wrong column','34')
+        result_1, result_2 = search_engine.search_by_user(conn, 'wrong column', '34')
         self.assertIsNotNone(conn)
-        self.assertEqual(len(result_1),0)
-        self.assertEqual(len(result_2),0)
+        self.assertEqual(len(result_1), 0)
+        self.assertEqual(len(result_2), 0)
         conn.close()
 
     # Test Search_by_organization function
-    
+
     def test_searchByOrganization_id(self):
         conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
         result_1, result_2, result_3 = search_engine.search_by_organization(conn, '_id', '106')
@@ -288,7 +288,7 @@ class TestSystemFunctions(unittest.TestCase):
         conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
         result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'url',
                                                                             'http://initech.zendesk.com/api/v2'
-                                                                            '/organizations/106.json') 
+                                                                            '/organizations/106.json')
         self.assertIsNotNone(conn)
         self.assertEqual(result_1[0]['_id'], '106')
         self.assertEqual(result_1[0]['name'], 'Qualitern')
@@ -370,15 +370,15 @@ class TestSystemFunctions(unittest.TestCase):
 
     def test_searchByorganization_wrong_column(self):
         conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
-        result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'wrong column','34')
+        result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'wrong column', '34')
         self.assertIsNotNone(conn)
-        self.assertEqual(len(result_1),0)
-        self.assertEqual(len(result_2),0)
-        self.assertEqual(len(result_3),0)
+        self.assertEqual(len(result_1), 0)
+        self.assertEqual(len(result_2), 0)
+        self.assertEqual(len(result_3), 0)
         conn.close()
 
     # Test Search_by_ticket function
-    
+
     def test_searchByTickets_id(self):
         conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
         result = search_engine.search_by_tickets(conn, '_id', '1a227508-9f39-427c-8f57-1b72f3fab87c')
@@ -393,7 +393,7 @@ class TestSystemFunctions(unittest.TestCase):
         conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
         result = search_engine.search_by_tickets(conn, 'url',
                                                  'http://initech.zendesk.com/api/v2/tickets/1a227508-9f39-427c-8f57'
-                                                 '-1b72f3fab87c.json') 
+                                                 '-1b72f3fab87c.json')
         self.assertIsNotNone(conn)
         self.assertEqual(result[0]['_id'], '1a227508-9f39-427c-8f57-1b72f3fab87c')
         self.assertEqual(result[0]['subject'], 'A Catastrophe in Micronesia')
@@ -448,7 +448,7 @@ class TestSystemFunctions(unittest.TestCase):
         result = search_engine.search_by_tickets(conn, 'description',
                                                  'Nostrud ad sit velit cupidatat laboris ipsum nisi amet laboris ex '
                                                  'exercitation amet et proident. Ipsum fugiat aute dolore tempor '
-                                                 'nostrud velit ipsum.') 
+                                                 'nostrud velit ipsum.')
         self.assertIsNotNone(conn)
         self.assertEqual(result[0]['_id'], '436bf9b0-1147-4c0a-8439-6f79833bff5b')
         self.assertEqual(result[0]['user_name'], 'Elma Castro')
@@ -560,11 +560,10 @@ class TestSystemFunctions(unittest.TestCase):
 
     def test_searchBytickets_wrong_column(self):
         conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
-        result = search_engine.search_by_tickets(conn, 'wrong column','34')
+        result = search_engine.search_by_tickets(conn, 'wrong column', '34')
         self.assertIsNotNone(conn)
-        self.assertEqual(len(result),0)
+        self.assertEqual(len(result), 0)
         conn.close()
-
 
 
 # Run the tests
