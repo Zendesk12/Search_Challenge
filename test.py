@@ -6,6 +6,8 @@
 import unittest
 import json
 
+from os.path import dirname, abspath
+
 import database
 import search_engine
 
@@ -19,7 +21,8 @@ class TestSystemFunctions(unittest.TestCase):
         result.close()
 
     def test_extractColumnsName(self):
-        json_test = open('../Search_challenge/Json_Data/test.json', encoding='utf-8-sig')
+        path = dirname(abspath(__file__))
+        json_test = open(f'{path}/Json_Data/test.json', encoding='utf-8-sig')
         json_data_test = json.loads(json_test.read())
         result = database.extract_columns_name(json_data_test)
         json_test.close()
@@ -29,7 +32,8 @@ class TestSystemFunctions(unittest.TestCase):
         self.assertEqual('D', result[3])
 
     def test_extractDataValues(self):
-        json_test = open('../Search_challenge/Json_Data/test.json', encoding='utf-8-sig')
+        path = dirname(abspath(__file__))
+        json_test = open(f'{path}/Json_Data/test.json', encoding='utf-8-sig')
         json_data_test = json.loads(json_test.read())
         columns = database.extract_columns_name(json_data_test)
         result = database.extract_data_values(json_data_test, columns)

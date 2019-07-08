@@ -7,6 +7,7 @@ import sqlite3
 from sqlite3 import Error
 import json
 from datetime import datetime
+from os.path import dirname, abspath
 
 
 # Create a database connection to a SQLite database 
@@ -30,11 +31,13 @@ def create_data_base(json_files):
 
     conn = create_connection()
 
+    path = dirname(abspath(__file__))
+
     print("insert has started at " + str(datetime.now()))
 
     # for each json file
     for json_f in json_files:
-        with open('../Search_challenge/Json_Data/' + json_f, encoding='utf-8-sig') as json_file:
+        with open(f'{path}/Json_Data/{json_f}', encoding='utf-8-sig') as json_file:
             json_data = json.loads(json_file.read())
 
         # Extract columns names
