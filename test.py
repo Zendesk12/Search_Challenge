@@ -263,6 +263,14 @@ class TestSystemFunctions(unittest.TestCase):
         self.assertEqual(result_1[0]['organization_name'], 'Multron')
         conn.close()
 
+     def test_searchByuser_wrong_column(self):
+        conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
+        result_1, result_2 = search_engine.search_by_user(conn, 'wrong column','34')
+        self.assertIsNotNone(conn)
+        self.assertEqual(len(result_1),0)
+        self.assertEqual(len(result_2),0)
+        conn.close()
+
     # Test Search_by_organization function
     
     def test_searchByOrganization_id(self):
@@ -358,6 +366,15 @@ class TestSystemFunctions(unittest.TestCase):
         self.assertEqual(result_1[0]['external_id'], '2355f080-b37c-44f3-977e-53c341fde146')
         self.assertEqual(result_2[0][1], 'A Nuisance in Greece')
         self.assertEqual(result_3[0][1], 'Cross Barlow')
+        conn.close()
+
+    def test_searchByorganization_wrong_column(self):
+        conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
+        result_1, result_2, result_3 = search_engine.search_by_organization(conn, 'wrong column','34')
+        self.assertIsNotNone(conn)
+        self.assertEqual(len(result_1),0)
+        self.assertEqual(len(result_2),0)
+        self.assertEqual(len(result_3),0)
         conn.close()
 
     # Test Search_by_ticket function
@@ -540,6 +557,14 @@ class TestSystemFunctions(unittest.TestCase):
         self.assertEqual(result[0]['user_name'], 'Josefa Mcfadden')
         self.assertEqual(result[0]['organization_name'], 'Xylar')
         conn.close()
+
+    def test_searchBytickets_wrong_column(self):
+        conn = database.create_data_base(["users.json", "organizations.json", "tickets.json"])
+        result = search_engine.search_by_tickets(conn, 'wrong column','34')
+        self.assertIsNotNone(conn)
+        self.assertEqual(len(result),0)
+        conn.close()
+
 
 
 # Run the tests
