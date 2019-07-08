@@ -1,11 +1,13 @@
-# import statements
+# test.py
+
+'''This test class has been implemented using unittest library.'''
+
+# Import statements
 import unittest
 import json
 
 import database
 import search_engine
-
-'''This test class has been implemented using unittest library.'''
 
 
 class TestSystemFunctions(unittest.TestCase):

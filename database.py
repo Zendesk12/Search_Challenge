@@ -1,3 +1,8 @@
+# database.py
+
+'''This file contains funtions oto set up the data base in memory.'''
+
+# Import statements
 import sqlite3
 from sqlite3 import Error
 import json
@@ -7,9 +12,7 @@ from datetime import datetime
 # Create a database connection to a SQLite database 
 
 def create_connection():
-    '''
-    :param db_file: Data base file path 
-    '''
+    
     try:
         conn = sqlite3.connect(':memory:')
         print(sqlite3.version)
@@ -22,7 +25,7 @@ def create_connection():
 
 def create_data_base(json_files):
     '''
-    :param json_file: List with the names of the json files
+    :param json_files: List with the names of the json files
     '''
 
     conn = create_connection()
@@ -79,7 +82,6 @@ def extract_columns_name(json_data):
             if col not in columns:
                 columns.append(col)
 
-
     return columns
 
 
@@ -94,6 +96,5 @@ def extract_data_values(json_data, columns):
             value.append(str(dict(data).get(i)))
         values.append(list(value))
         value.clear()
-
 
     return values

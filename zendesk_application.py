@@ -1,7 +1,12 @@
+# zendesk_application.py
+
+'''This file contains the logic application function.'''
+
+# Import statements
 from database import create_data_base
 from search_engine import search_by_user, search_by_organization, search_by_tickets, searchable_fields
 
-'''This file contains the logic application function.'''
+# Main run function. 
 
 def run_application():
     # Messages
@@ -22,21 +27,21 @@ def run_application():
     command = input(information_text_1)
     # Exit any time
     while not command == 'quit':
-    	# Client press "Enter"
+        # Client press "Enter"
         if command == '':
-        	# Exit any time
+            # Exit any time
             while not command == 'quit':
-            	# Display options
+                # Display options
                 command = input(information_text_2)
                 # Selected Search option
                 if command == '1':
-                	# Exit any time
+                    # Exit any time
                     while not command == 'quit':
-                    	# Display table options
+                        # Display table options
                         command = input(information_text_3)
                         # Selected users table
                         if command == '1':
-                        	# Enter search column
+                            # Enter search column
                             search_attr = input('Enter search term\n')
                             # Enter search value
                             search_value = input('Enter search value\n')
@@ -44,7 +49,7 @@ def run_application():
                             search_by_user(connection, search_attr, search_value)
                         # Selected organizations table
                         elif command == '2':
-                        	# Enter search column
+                            # Enter search column
                             search_attr = input('Enter search term\n')
                             # Enter search value
                             search_value = input('Enter search value\n')
@@ -52,7 +57,7 @@ def run_application():
                             search_by_organization(connection, search_attr, search_value)
                         # Selected tickets table
                         elif command == '3':
-                        	# Enter search column
+                            # Enter search column
                             search_attr = input('Enter search term\n')
                             # Enter search value
                             search_value = input('Enter search value\n')
@@ -70,6 +75,6 @@ def run_application():
     print('Good Bye')
 
 
-# Run the game
+# Run the application
 if __name__ == '__main__':
     run_application()
