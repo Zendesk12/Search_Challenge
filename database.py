@@ -62,6 +62,8 @@ def create_data_base(json_files):
         print("insert table " + table_name + " has completed")
     print("insert has completed at " + str(datetime.now()))
 
+    conn.row_factory = sqlite3.Row
+
     return conn
 
 
